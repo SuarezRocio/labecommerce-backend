@@ -123,9 +123,9 @@ DROP TABLE users;
 
 INSERT INTO purchase (id, productId, quantity, totalPrice, buyer_id)
 VALUES
-("1" , "1" , 4 , 100 , "1");
-/*("2" , "2" , 4 , 100 , "2"),
-("7", "3",7, 200, "7");*/
+("1" , "1" , 4 , 100 , "1"),
+("2" , "2" , 4 , 100 , "2"),
+("7", "3",7, 200, "7");
 
 DROP TABLE purchase;
 
