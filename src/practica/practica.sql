@@ -20,7 +20,7 @@ SELECT id FROM users
 ORDER BY id DESC;
 
 
-DELETE FROM users WHERE id = 1;
+/*DELETE FROM users WHERE id = 1;*/
 
 SELECT * FROM users;
 
@@ -95,9 +95,9 @@ CREATE TABLE purchase (
     quantity INTEGER NOT NULL,
     totalPrice REAL NOT NULL,  
     buyer_id TEXT NOT NULL,
-    FOREiGN KEY (buyer_id) REFERENCES users(id)
-);
+    FOREiGN KEY (buyer_id) REFERENCES users(id) ON DELETE CASCADE
 
+);
 
 SELECT * FROM purchase;
 
@@ -123,9 +123,9 @@ DROP TABLE users;
 
 INSERT INTO purchase (id, productId, quantity, totalPrice, buyer_id)
 VALUES
-("1" , "1" , 4 , 100 , "1"),
-("2" , "2" , 4 , 100 , "2"),
-("7", "3",7, 200, "7");
+("1" , "1" , 4 , 100 , "1");
+/*("2" , "2" , 4 , 100 , "2"),
+("7", "3",7, 200, "7");*/
 
 DROP TABLE purchase;
 
@@ -159,8 +159,8 @@ ON purchase.buyer_id = users.id;
 CREATE TABLE purchase_purchaser_producto (
     purchase_id TEXT NOT NULL,
     producto_id TEXT NOT NULL,
-    FOREIGN KEY (purchase_id) REFERENCES purchase(id)
-    FOREIGN KEY (producto_id) REFERENCES productos(id)
+    FOREIGN KEY (purchase_id) REFERENCES purchase(id) ON DELETE CASCADE
+    FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE CASCADE
 );
 
 
