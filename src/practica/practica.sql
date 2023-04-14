@@ -39,10 +39,10 @@ SELECT * FROM productos;
 
 INSERT INTO productos(id , name, categoria, preco, img, descripcao)
 VALUES 
-("prod001",  "alho","alimento" , 7 , "img", "descripcao"),
-("prod006",  "batata","alimento" , 6 ,"img", "descripcao"),
-("prod008",  "banana","alimento" , 4 ,"img", "descripcao"),
-("prod0010",  "cebola","alimento" , 2 ,"img", "descripcao");
+("prod001",  "alho","alimento" , 7 , "https://ibb.co/BnCvW1S", "descripcao"),
+("prod006",  "batata","alimento" , 6 ,"https://ibb.co/vwxd2jL", "descripcao"),
+("prod008",  "banana","alimento" , 4 ,"https://ibb.co/FKq7B6j", "descripcao"),
+("prod0010",  "cebola","alimento" , 2 ,"https://ibb.co/yyXPBrZ", "descripcao");
 
 
 UPDATE productos
@@ -67,10 +67,10 @@ VALUES
 ("u002",  "Ramona de Solange", "solange@gmail.com","2DFSAFAS08", "OURO");
 
 
-INSERT INTO productos (id , name, categoria, preco)
+INSERT INTO productos (id , name, categoria, preco, img , descripcao)
 VALUES
-("prod002",  "tomate","alimento" , 10 ,"img", "descripcao"),
-("prod003",  "manga","alimento" , 6 ,"img", "descripcao");
+("prod002",  "tomate","alimento" , 10 ,"https://ibb.co/2Yg3pJ6", "descripcao"),
+("prod003",  "manga","alimento" , 6 ,"https://ibb.co/j60XDHt", "descripcao");
 
 
 DROP TABLE productos;
@@ -126,6 +126,8 @@ VALUES
 DROP TABLE purchase;
 
 SELECT * FROM purchase;
+
+
 
 
 SELECT 
