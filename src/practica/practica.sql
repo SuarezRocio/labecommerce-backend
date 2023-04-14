@@ -19,9 +19,6 @@ SELECT * FROM users;
 SELECT id FROM users
 ORDER BY id DESC;
 
-
-/*DELETE FROM users WHERE id = 1;*/
-
 SELECT * FROM users;
 
 CREATE TABLE productos(
@@ -29,7 +26,6 @@ id TEXT PRIMARY KEY UNIQUE NOT NULL,
 name TEXT NOT NULL,
 categoria TEXT NOT NULL,
 preco TEXT
-/*img TEXT NOT NULL , img*/ 
 );
 
 
@@ -41,12 +37,10 @@ SELECT * FROM productos;
 
 INSERT INTO productos(id , name, categoria, preco)
 VALUES 
-("1",  "alho","alimento" , 208 ),
-("6",  "batata","alimento" , 208 ),
-("8",  "banana","alimento" , 208 ),
-("10",  "cebola","alimento" , 208  );
-
-
+("1",  "alho","alimento" , 7 ),
+("6",  "batata","alimento" , 6 ),
+("8",  "banana","alimento" , 4 ),
+("10",  "cebola","alimento" , 2 );
 
 
 SELECT * FROM productos;
@@ -54,7 +48,6 @@ SELECT * FROM productos;
 SELECT name FROM productos
 ORDER BY name DESC;
 
-/*ASC*/
 
 DELETE FROM productos WHERE id = 1;
 
@@ -62,32 +55,24 @@ DELETE FROM productos WHERE id = 1;
 SELECT * FROM productos;
 
 
-/*Uniendo mi usuario con mi compra*/
-
 INSERT INTO users(id, name, email, password, type)
 VALUES
 ("2",  "Ramona de Solange", "solange@gmail.com","2DFSAFAS08", "OURO");
 
 
-
 INSERT INTO productos (id , name, categoria, preco)
 VALUES
-("2",  "tomate","alimento" , 108 ),
-("3",  "tomate","alimento" , 108 );
-
+("2",  "tomate","alimento" , 10 ),
+("3",  "manga","alimento" , 6 );
 
 
 DROP TABLE productos;
 
-/*uniendo mi usuario con mi producto , NO ENCUENTRA LA COLUMNA DE PRODUCTOS.ID*/
 
 SELECT * FROM users
 INNER JOIN productos 
 ON productos.productos.id = users.id;
 
-
-
-/*uniendo mi usuario con mi compra*/
 
 CREATE TABLE purchase (
     id TEXT PRIMARY KEY NOT NULL,
@@ -105,15 +90,11 @@ SELECT * FROM purchase;
 DROP TABLE purchase;
 
 
-
-
 INSERT INTO users (id, name, email, password, type)
-VALUES("7", "marcelo", "marcelo@gmail.com", "marcelo120",  "PLATINO"),
+VALUES("7", "ricardo", "ricardo@gmail.com", "ricardo120",  "PLATINO"),
 ("8", "mariana", "mariana@gmail.com", "mariana120", "OURO"),
 ("9", "karen", "karen@gmail.com", "karen120", "BLACK"),
-( "10", "marcela", "marcela@gmail.com", "marcala123", "PLATINO");
-
-
+( "10", "lurdes", "lurdes@gmail.com", "lurdes123", "PLATINO");
 
 SELECT * FROM users;
 
@@ -123,17 +104,18 @@ DROP TABLE users;
 
 INSERT INTO purchase (id, productId, quantity, totalPrice, buyer_id)
 VALUES
-("1" , "1" , 4 , 100 , "1"),
-("2" , "2" , 4 , 100 , "2"),
-("7", "3",7, 200, "7");
+("1", "1" , 4 , 10 , "1"),
+("2", "2" , 4 , 10 , "2"),
+("7", "3" , 7 , 20 , "7"),
+("8", "6" , 4 , 30 , "8"),
+("9", "8" , 8 , 40 , "9"),
+("10","10", 7 , 20 , "10");
 
 DROP TABLE purchase;
 
 SELECT * FROM purchase;
 
 
-/*uniendo mi userid con mi producto, no entiendo porque no une todos mis usuarios y
-todos los productos que fui ejecutando*/
 SELECT 
 users.id AS usersId,
 buyer_id AS  buyer_id,
@@ -153,9 +135,6 @@ LEFT JOIN  purchase
 ON purchase.buyer_id = users.id;
 
 
-
-/*uniendo mi compra con mi producto, */
-
 CREATE TABLE purchase_purchaser_producto (
     purchase_id TEXT NOT NULL,
     producto_id TEXT NOT NULL,
@@ -167,12 +146,14 @@ CREATE TABLE purchase_purchaser_producto (
 DROP TABLE purchase_purchaser_producto;
 
 
-/*no encuentra la tabla  purchase_purchaser_producto*/
 INSERT INTO purchase_purchaser_producto (purchase_id , producto_id)
 VALUES
 ("1", "1"),
 ("2", "2"),
-("7", "3");
+("7", "3"),
+("8","6"),
+("9","8"),
+("10","10");
 
 SELECT * FROM purchase_purchaser_producto;
 
@@ -189,8 +170,6 @@ ON purchase_purchaser_producto.purchase_id = productos.id;
 
 /*no encuentra purchase.id*/
 SELECT 
-/*purchase_id AS purchaseId,*/
-/*purchase.totalPrice,*/ 
 purchase_purchaser_producto.purchase_id AS purchaseId,
 purchase_purchaser_producto.producto_id AS productoId,
 productos.name AS productos
