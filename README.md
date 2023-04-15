@@ -4,7 +4,7 @@
 
 📝 Como rodar este projeto?
 
-# Clone este repositório
+<h3># Clone este repositório<h3>
 $ git clone linkrepo
 
 # Acesse a pasta do projeto no seu terminal
