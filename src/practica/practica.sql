@@ -187,12 +187,34 @@ ON purchase_purchaser_producto.purchase_id = productos.id;
 
 
 
-SELECT 
+/*SELECT 
 purchase_purchaser_producto.purchase_id AS purchaseId,
 purchase_purchaser_producto.producto_id AS productoId,
 productos.name AS productos
-FROM productos
-LEFT JOIN purchase_purchaser_producto
-ON purchase_purchaser_producto.purchase_id = productos.id
-INNER JOIN productos AS productos_buy
-ON purchase_purchaser_producto.purchase_id = productos_buy.id;
+FROM purchase_purchaser_producto
+LEFT JOIN productos
+ON purchase_purchaser_producto.purchase_id = productos.id;*/
+
+
+SELECT  
+productos.name, 
+productos.preco,
+purchase.quantity,
+purchase.totalPrice,
+purchase.buyer_id
+FROM purchase
+INNER JOIN purchase_purchaser_producto ON purchase.id = purchase_purchaser_producto.purchase_id
+INNER JOIN productos ON purchase_purchaser_producto.producto_id = productos.id;    
+
+
+/*SELECT
+    purchases.id as purchaseId,
+    purchases.buyer as buyerId,
+    products.id AS productId,
+    products.name AS productName,
+    purchases_products.quantity AS productQuantity,
+    products.price AS productPrice,
+    purchases.total_price
+FROM purchases
+    INNER JOIN purchases_products ON purchases.id = purchases_products.purchase_id
+    INNER JOIN products ON purchases_products.product_id = products.id;*/

@@ -62,82 +62,11 @@ app.get('/productos', async (req: Request, res: Response) => {
 app.get('/users/search', async (req: Request, res: Response) => {
   try {
     const q = req.query.q
-    /*const newId = req.body.id
-    const newName = req.body.name
-    const newPassword = req.body.password
-    const newEmail = req.body.email
 
-
-    if (newId !== undefined) {
-
-      if (typeof newId !== "string") {
-        res.status(400)
-        throw new Error("'id' deve ser string")
-      }
-
-      if (newId.length < 1) {
-        res.status(400)
-        throw new Error("'id' deve possuir no mínimo 1 caractere")
-      }
-    }
-
-    if (newName !== undefined) {
-
-      if (typeof newName !== "string") {
-        res.status(400)
-        throw new Error("'name' deve ser string")
-      }
-
-      if (newName.length < 1) {
-        res.status(400)
-        throw new Error("'name' deve possuir no mínimo 1 caractere")
-      }
-    }
-
-    if (newEmail !== undefined) {
-
-      if (typeof newEmail !== "string") {
-        res.status(400)
-        throw new Error("'email' deve ser string")
-      }
-
-      if (newEmail.length < 1) {
-        res.status(400)
-        throw new Error("'email' deve possuir no mínimo 1 caractere")
-      }
-    }
-
-
-    if (newPassword !== undefined) {
-
-      if (typeof newPassword !== "string") {
-        res.status(400)
-        throw new Error("'password' deve ser string")
-      }
-
-      if (newPassword.length < 1) {
-        res.status(400)
-        throw new Error("'password' deve possuir no mínimo 1 caractere")
-      }
-    }*/
     const [users] = await db("users").where({ id: q })
 
     res.status(200).send({ users })
 
-    /*if (users) {
-
-      const updateUsers = {
-        id: newId || users.newId,
-        name: newName || users.name,
-        password: newPassword || users.password,
-        email: newEmail || users.email
-      }
-      await db("users").update(updateUsers).where({ id: q })*/
-    /*} else {
-      res.status(404)
-      throw new Error("'id' não encontrada")
-    }
-    res.status(200).send({ message: "Atualização realizada com sucesso" })*/
 
   } catch (error) {
     console.log(error)
@@ -154,87 +83,12 @@ app.get('/productos/search', async (req: Request, res: Response) => {
   try {
     const q = req.query.q 
 
-    /*const newId = req.body.id
-    const newName = req.body.name
-    const newPreco = req.body.preco
-    const newCategoria = req.body.categoria
-
-    if (newId !== undefined) {
-
-      if (typeof newId !== "string") {
-        res.status(400)
-        throw new Error("'id' deve ser string")
-      }
-
-      if (newId.length < 1) {
-        res.status(400)
-        throw new Error("'id' deve possuir no mínimo 1 caractere")
-      }
-    }
-
-    if (newName !== undefined) {
-
-      if (typeof newName !== "string") {
-        res.status(400)
-        throw new Error("'name' deve ser string")
-      }
-
-      if (newName.length < 1) {
-        res.status(400)
-        throw new Error("'name' deve possuir no mínimo 1 caractere")
-      }
-    }
-
-
-    if (newPreco !== undefined) {
-
-      if (typeof newPreco !== "number") {
-        res.status(400)
-        throw new Error("'preco' deve ser number")
-      }
-
-      if (newPreco !== 0) {
-        res.status(400)
-        throw new Error("'preco' deve possuir no mínimo 1 numero diferente de 0")
-      }
-    }
-
-
-    if (newCategoria !== undefined) {
-
-      if (typeof newCategoria !== "string") {
-        res.status(400)
-        throw new Error("'categoria' deve ser string")
-      }
-
-      if (newCategoria.length < 1) {
-        res.status(400)
-        throw new Error("'categoria' deve possuir categoria alimento")
-      }
-    }*/
+  
    
     const [productos] = await db("productos").where({ id: q })
     
     res.status(200).send({ productos })
 
-   /* if (productos) {
-
-
-      const updateProductos = {
-        id: newId || productos.newId,
-        name: newName || productos.name,
-        preco: newPreco || productos.preco,
-        categoria: newCategoria || productos.categoria
-      }
-      await db("productos").update(updateProductos).where({ id: q })
-    } else {
-      res.status(404)
-      throw new Error("'id' não encontrada")
-    }
-
-
-
-    res.status(200).send({ message: "Atualização realizada com sucesso" })*/
   } catch (error) {
     console.log(error)
 
@@ -378,16 +232,18 @@ app.get('/purchase', async (req: Request, res: Response) => {
 
 app.post('/purchase/newPurchase', async (req: Request, res: Response) => {
   try {
-    const userId = req.body.userId
+    const purchaseId = req.body.purchaseId
     const productId = req.body.productId
     const quantity = req.body.quantity
     const totalPrice = req.body.totalPrice
     const buyer_id = req.body.buyer_id
+    
+    console.log(buyer_id)
 
-    if (typeof userId !== "string") {
+   /*if (typeof userId !== "string") {
       res.status(400)
       throw new Error("user deve ser string")
-    }
+    }*/
 
     if (typeof productId !== "string") {
       res.status(400)
@@ -412,14 +268,19 @@ app.post('/purchase/newPurchase', async (req: Request, res: Response) => {
       throw new Error("buyer_id deve ser string")
     }
 
-    const newPurchase: { userId: string, productId: string, quantity: number, totalPrice: number, buyer_id: string } = {
-      userId,
+    
+    if (typeof purchaseId !== "string") {
+      res.status(400)
+      throw new Error("product deve ser number")
+    }
+      const newPurchase: { id: string, productId: string, quantity: number, totalPrice: number, buyer_id: string } = {
+      id: purchaseId,
       productId,
       quantity,
       totalPrice,
       buyer_id
     }
-    await db("purchase").insert({ newPurchase })
+    await db("purchase").insert(newPurchase)
     res.status(200).send("Cadastro realizado con suseso")
 
 
@@ -521,11 +382,6 @@ app.put("/users/:id", async (req: Request, res: Response) => {
       await db("users").update(accountToEdit).where({ id })
     } 
 
-    /*const id = req.params.id*/
-    /*const result = db.select("id", "email", "password", "type")
-      .from("users")
-      /*.where({id:id})*/
-    /*  .innerJoin("productos", "users.productos_id", "=", "productos.id")*/
 
 
     res.status(200).send("user cadastrado com sucesso")
@@ -583,10 +439,6 @@ app.put("/productos/:id", async (req: Request, res: Response) => {
       await db("productos").update(newAcount).where({ id })
     }
 
-     /*const result = db.select("id", "name", "preco", "categoria")
-      .from("productos")
-      /*.where({id:id})*/
-     /* .innerJoin("purchase", "productos.purchase_id", "=", "purchase.id")*/
 
     res.status(201).send("Producto cadastrado com sucesso")
   
