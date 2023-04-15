@@ -4,19 +4,19 @@
 
 📝 Como rodar este projeto?
 
-<h3># Clone este repositório<h3>
+<h3># Clone este repositório</h3>
 $ git clone linkrepo
 
-# Acesse a pasta do projeto no seu terminal
+<h3># Acesse a pasta do projeto no seu terminal</h3>
 $ cd labecommmerce-backend
 
-# Instale as dependências
+<h3># Instale as dependências</h3>
 $ npm install
 
-# Execute a aplicaçāo
+<h3># Execute a aplicaçāo</h3>
 $ npm run start
 
-# A aplicaçāo será iniciada na porta 3003, acesse pelo navegador: http://localhost:3003
+<h3># A aplicaçāo será iniciada na porta 3003, acesse pelo navegador: http://localhost:3003</h3>
 
 
 
